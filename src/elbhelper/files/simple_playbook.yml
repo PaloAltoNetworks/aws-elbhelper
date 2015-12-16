@@ -1,0 +1,20 @@
+- name: configure NAT rule for internal ELB
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: create/update http NAT
+      panos_nat:
+        ip_address: "{{host}}"
+        password: "{{admin_password}}"
+        rule_name: "OneNAT"
+        from_zone: ["external"]
+        to_zone: "external"
+        source: ["any"]
+        destination: ["FW1-eth1"]
+        service: "service-http"
+        snat_type: "dynamic-ip-and-port"
+        snat_interface: "ethernet1/2"
+        dnat_address: "{{elb_ip}}"
+        override: "true"

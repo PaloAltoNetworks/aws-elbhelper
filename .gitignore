@@ -1,0 +1,4 @@
+.idea
+*.pyc
+pan/
+db.txt
