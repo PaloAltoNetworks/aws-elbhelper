@@ -257,7 +257,7 @@ if __name__ == "__main__":
         level=logging.DEBUG)
     logging.getLogger('boto').setLevel(logging.ERROR)
 
-    db = FileDB(CFG.DB_FILE)
+    db = FileDB(CFG)
 
     import time, sys
     counter = 0

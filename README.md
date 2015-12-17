@@ -16,3 +16,10 @@ This project is part 2 of Amazon security competency.
 #### Notes
 
 - all Firewall must have and share the same password
+- for 'poor-man-HA' must have 'aws' profile set in ~/.aws/credentials
+
+>    [aws]
+>
+>    aws_access_key_id=DUMMY
+>    
+>    aws_secret_access_key=DUMMY
