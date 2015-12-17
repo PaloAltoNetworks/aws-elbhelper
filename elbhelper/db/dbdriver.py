@@ -17,7 +17,6 @@ __version__ = ''
 
 import ConfigParser
 import logging
-from config import defaults as CFG
 
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
@@ -32,13 +31,13 @@ class FileDB(object):
     TABLE_ASSIGNEMENTS='assignements'
     TABLE_MAPPING='mappings'
 
-    def __init__(self, cfg_file):
+    def __init__(self, CFG):
         logging.basicConfig(
         format='%(asctime)s [%(levelname)s] %(message)s',
         datefmt='%Y%m%d %T', level=logging.DEBUG)
-        self.ha = CFG.S3_HA
+        self.CFG = CFG
 
-        if self.ha:
+        if CFG.S3_HA:
             conn = S3Connection(profile_name=CFG.S3_CREDENTIALS_PROFILE)
             bucket = conn.get_bucket(CFG.S3_BUCKET)
             self.k = Key(bucket)
@@ -46,7 +45,6 @@ class FileDB(object):
 
         self.__initialize_db_file()
 
-        self.cfg_file = cfg_file
         self.__configDB = ConfigParser.ConfigParser()
         self.load_db()
 
@@ -105,20 +103,20 @@ class FileDB(object):
         return len(assigned_addr) > 0
 
     def save_db(self):
-        with open(self.cfg_file, 'wb') as configfile:
+        with open(self.CFG.DB_FILE, 'wb') as configfile:
             self.db_file.write(configfile)
         configfile.close()
 
-        if (self.ha):
-            with open(self.cfg_file, 'r') as myfile:
+        if (self.CFG.S3_HA):
+            with open(self.CFG.DB_FILE, 'r') as myfile:
                 data=myfile.read()
             myfile.close()
             self.k.set_contents_from_string(data)
 
     def load_db(self):
-        if (self.ha):
-            self.k.get_contents_to_filename(CFG.DB_FILE)
-        self.db_file.read(self.cfg_file)
+        if (self.CFG.S3_HA):
+            self.k.get_contents_to_filename(self.CFG.DB_FILE)
+        self.db_file.read(self.CFG.DB_FILE)
 
     def __initialize_db_file(self):
         """This is called only once at the beginning. If HA is enabled it tries to
@@ -126,7 +124,7 @@ class FileDB(object):
         to initialize an empty db file and upload it to the S3"""
 
         # if we do not need HA bail out
-        if not self.ha:
+        if not self.CFG.S3_HA:
             return
 
         try:
@@ -134,11 +132,11 @@ class FileDB(object):
         except S3ResponseError as ex:
             if ex.status == 404:
                 LOG.warn('Database file %s not found in S3 bucket [%s]. Initializing the new one',
-                         CFG.DB_FILE, CFG.S3_BUCKET)
+                         self.CFG.DB_FILE, self.CFG.S3_BUCKET)
                 self.k.set_contents_from_string('[mappings]\n[assignements]\n')
             else:
                 LOG.fatal('There was a communication issue with S3 bucket [%s] accessing the file %s. Exception: %s',
-                          ex, CFG.S3_BUCKET, CFG.DB_FILE, ex)
+                          ex, self.CFG.S3_BUCKET, self.CFG.DB_FILE, ex)
                 import sys
                 sys.exit(0)
 

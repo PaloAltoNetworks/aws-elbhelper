@@ -1,0 +1,2 @@
+python-dev
+git+https://github.com/PaloAltoNetworks-BD/platter#egg=platter

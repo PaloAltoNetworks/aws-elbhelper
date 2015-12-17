@@ -13,5 +13,5 @@
 #  limitations under the License.
 
 __author__ = 'ivanbojer'
-__version__ = '0.5'
-
+__version__ = '0.8.0'
+__author_email__ = 'techbizdev@paloaltonetworks.com'

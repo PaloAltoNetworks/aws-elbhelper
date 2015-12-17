@@ -23,7 +23,8 @@ S3_HA=True
 SLEEP=10
 
 # where is our ansible library stored at?
-ANSIBLE_LIBRARY='/Users/ibojer/SourceCode/ansible-pan/library'
+#ANSIBLE_LIBRARY='/Users/ibojer/SourceCode/ansible-pan/library'
+ANSIBLE_LIBRARY='/home/ubuntu/ansible-pan/library'
 
 # DO NOT CHANGE ANYTHING BELLOW
 DB_FILE='files/db.txt'
