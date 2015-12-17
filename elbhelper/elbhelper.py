@@ -273,11 +273,10 @@ if __name__ == "__main__":
             else:
                 LOG.info('ELB address did not change [check #%s]. Nothing to do!', counter)
 
-            #TODO enable this
-            # if not CFG.DEBUG:
-            #     if CFG.SLEEP < 60:
-            #         LOG.warn('Retry time cannot be less than 60 seconds.')
-            #         sys.exit(0)
+            if not CFG.DEBUG:
+                if CFG.SLEEP < 60:
+                    LOG.warn('Retry time cannot be less than 60 seconds.')
+                    sys.exit(0)
             time.sleep(CFG.SLEEP)
         except KeyboardInterrupt:
             LOG.info("Good bye!")
