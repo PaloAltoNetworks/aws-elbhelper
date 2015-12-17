@@ -17,10 +17,11 @@ __version__ = ''
 
 import ConfigParser
 import logging
-from config import defaults as CFG
 
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
+
+from elbhelper.config import defaults as CFG
 
 LOG = logging.getLogger(__name__)
 
