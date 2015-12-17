@@ -18,7 +18,7 @@ import sys
 import os.path
 sys.path.insert(0, os.path.abspath('.'))
 
-from elbhelper import __version__
+from elbhelper import __version__, __author__, __author_email__
 
 with open('requirements.txt') as f:
     _requirements = f.read().splitlines()
@@ -32,9 +32,10 @@ setup(
     packages=find_packages(),
     url='https://github.com/PaloAltoNetworks-BD/aws-elbhelper',
     license='http://www.apache.org/licenses/LICENSE-2.0',
-    author='ivanbojer',
-    author_email='techbizdev@paloaltonetworks.com',
+    author=__author__,
+    author_email=__author_email__,
     description='Targeted script that allows update of the FW NAT rules based on the dynamic AWS ELB VIP changes',
     include_package_data=True,
-    install_requires=_requirements
+    install_requires=_requirements,
+    long_description=_long_description
 )
