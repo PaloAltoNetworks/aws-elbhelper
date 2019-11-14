@@ -6,5 +6,5 @@ MarkupSafe==0.23
 pan-python==0.8.0
 paramiko==1.16.0
 pycrypto==2.6.1
-PyYAML==3.11
+PyYAML==5.1
 wheel==0.24.0
