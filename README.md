@@ -1,7 +1,3 @@
-This Repo is going to be remove. Any question please contact respective owner ABC
-
-
-
 ### ELBHelper
 Elb helper is a targeted Python application that monitors changes in the ELB VIPs and updates NAT firewall rule 
 if necessary.
