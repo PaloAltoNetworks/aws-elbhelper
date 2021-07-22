@@ -1,4 +1,4 @@
-This Repository is going to be archive in one week from 6/28/20121. It is old use case and not relevant use case. 
+This repository is archived as it reflects an older use case that is no longer relevant.
 
 ### ELBHelper
 Elb helper is a targeted Python application that monitors changes in the ELB VIPs and updates NAT firewall rule 
