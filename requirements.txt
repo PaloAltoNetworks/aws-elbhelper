@@ -1,4 +1,4 @@
-ansible==1.9.4
+ansible==2.9.20
 boto==2.38.0
 ecdsa==0.13
 Jinja2==2.8
